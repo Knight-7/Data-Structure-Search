@@ -31,4 +31,41 @@ int Search_Bin(SSTable ST, ElemType key)
 	}
 }
 
+/******************二叉排序树**********************/
+typedef struct BSTNode
+{
+	ElemType data;
+	BSTNode *lchild, *rchild;
+}BSTNode, *BSTree;
+//二叉排序树的查找
+BSTree Search_BST(BSTree T, ElemType key)
+{
+	if (T->data == key) return T;
+	else if (T->data < key) return Search_BST(T->lchild, key);
+	else return Search_BST(T->rchild, key);
+}
+//二叉排序树的插入
+void InsertBST(BSTree T, ElemType key)
+{
+	if (!T) {
+		T = new BSTNode;
+		T->data = key;
+		T->lchild = NULL;
+		T->rchild = NULL;
+	}
+	else if (T->data < key) InsertBST(T->rchild, key);
+	else InsertBST(T->lchild, key);
+}
+//创建一个二叉排序树
+void CreatBST(BSTree &T)
+{
+	T = NULL;
+	ElemType ch;
+	while (ch != 101) {
+		InsertBST(T, ch);
+		cin >> ch;
+	}
+	
+}
+
 #endif // ! SEARCH_H_INCLUDE
