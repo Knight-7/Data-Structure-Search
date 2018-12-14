@@ -11,7 +11,7 @@ typedef struct {
 	ElemType *R;
 	int lenth;
 }SSTable;
-//Ë³Ðò²éÕÒ(Ë³Ðò)
+//é¡ºåºæŸ¥æ‰¾(é¡ºåº)
 int Search_Seq(SSTable ST, ElemType key)
 {
 	for (int i = ST.lenth;; i--) {
@@ -20,7 +20,7 @@ int Search_Seq(SSTable ST, ElemType key)
 	}
 	return 0;
 }
-//Ë³Ðò²éÕÒ£¨Á´Ê½£©
+//é¡ºåºæŸ¥æ‰¾ï¼ˆé“¾å¼ï¼‰
 int Search_Link(LinkList L,ElemType key)
 {
 	LinkList p = L->next;
@@ -31,7 +31,7 @@ int Search_Link(LinkList L,ElemType key)
 	}
 	return 0;
 }
-//¶Ô·Ö²éÕÒ
+//å¯¹åˆ†æŸ¥æ‰¾
 int Search_Bin(SSTable ST, ElemType key)
 {
 	int l = 1, r = ST.lenth;
@@ -43,20 +43,20 @@ int Search_Bin(SSTable ST, ElemType key)
 	}
 }
 
-/******************¶þ²æÅÅÐòÊ÷**********************/
+/******************äºŒå‰æŽ’åºæ ‘**********************/
 typedef struct BSTNode
 {
 	ElemType data;
 	BSTNode *lchild, *rchild;
 }BSTNode, *BSTree;
-//¶þ²æÅÅÐòÊ÷µÄ²éÕÒ
+//äºŒå‰æŽ’åºæ ‘çš„æŸ¥æ‰¾
 BSTree Search_BST(BSTree T, ElemType key)
 {
 	if (T->data == key) return T;
 	else if (T->data < key) return Search_BST(T->lchild, key);
 	else return Search_BST(T->rchild, key);
 }
-//¶þ²æÅÅÐòÊ÷µÄ²åÈë
+//äºŒå‰æŽ’åºæ ‘çš„æ’å…¥
 void InsertBST(BSTree T, ElemType key)
 {
 	if (!T) {
@@ -68,7 +68,7 @@ void InsertBST(BSTree T, ElemType key)
 	else if (T->data < key) InsertBST(T->rchild, key);
 	else InsertBST(T->lchild, key);
 }
-//´´½¨Ò»¸ö¶þ²æÅÅÐòÊ÷
+//åˆ›å»ºä¸€ä¸ªäºŒå‰æŽ’åºæ ‘
 void CreatBST(BSTree &T)
 {
 	T = NULL;
@@ -78,6 +78,6 @@ void CreatBST(BSTree &T)
 		cin >> ch;
 	}
 }
-/********************************************/
+/*******************å“ˆå¸Œè¡¨********************/
 
 #endif // ! SEARCH_H_INCLUDE
