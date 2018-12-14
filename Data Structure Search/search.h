@@ -3,6 +3,7 @@
 #define SEARCH_H_INCLUDE
 
 #include<bits/stdc++.h>
+#include"LinkList.h"
 using namespace std;
 
 #define ElemType int
@@ -10,12 +11,23 @@ typedef struct {
 	ElemType *R;
 	int lenth;
 }SSTable;
-//Ë³Ðò²éÕÒ
+//Ë³Ðò²éÕÒ(Ë³Ðò)
 int Search_Seq(SSTable ST, ElemType key)
 {
 	for (int i = ST.lenth;; i--) {
 		if (ST.R[i] == key)
 			return i;
+	}
+	return 0;
+}
+//Ë³Ðò²éÕÒ£¨Á´Ê½£©
+int Search_Link(LinkList L,ElemType key)
+{
+	LinkList p = L->next;
+	while (p) {
+		if (L->data == key)
+			return L->data;
+		p = p->next;
 	}
 	return 0;
 }
@@ -48,10 +60,10 @@ BSTree Search_BST(BSTree T, ElemType key)
 void InsertBST(BSTree T, ElemType key)
 {
 	if (!T) {
-		T = new BSTNode;
-		T->data = key;
-		T->lchild = NULL;
-		T->rchild = NULL;
+		BSTree S = new BSTNode;
+		S->data = key;
+		S->lchild = S->rchild = NULL;
+		T = S;
 	}
 	else if (T->data < key) InsertBST(T->rchild, key);
 	else InsertBST(T->lchild, key);
@@ -65,7 +77,7 @@ void CreatBST(BSTree &T)
 		InsertBST(T, ch);
 		cin >> ch;
 	}
-	
 }
+/********************************************/
 
 #endif // ! SEARCH_H_INCLUDE
