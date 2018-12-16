@@ -57,7 +57,7 @@ BSTree Search_BST(BSTree T, ElemType key)
 	else return Search_BST(T->rchild, key);
 }
 //二叉排序树的插入
-void InsertBST(BSTree T, ElemType key)
+void InsertBST(BSTree &T, ElemType key)
 {
 	if (!T) {
 		BSTree S = new BSTNode;
@@ -73,11 +73,68 @@ void CreatBST(BSTree &T)
 {
 	T = NULL;
 	ElemType ch;
+	cin >> ch;
 	while (ch != 101) {
 		InsertBST(T, ch);
 		cin >> ch;
 	}
 }
+//输出二叉排序树
+void Traver_BS(BSTree T)
+{
+	if (T) {
+		Traver_BS(T->lchild);
+		cout << T->data << " ";
+		Traver_BS(T->rchild);
+	}
+}
 /*******************哈希表********************/
+#define m 20
+#define KeyType int
+#define nullkey 0
+typedef struct
+{
+	KeyType key;
+	//infoType otherinfo;
+}HashTable[m];
+//除留余数法
+int Hash(KeyType key)
+{
+	return key % 11;
+}
+//创建散列表
+int CreatHash(HashTable ht, KeyType key)
+{
+	int h0 = Hash(key);
+	if (ht[h0].key == nullkey) ht[h0].key = key;
+	else {
+		for (int i = 1; i < m; i++) {
+			h0 = (h0 + i) % m;
+			if (ht[h0].key == nullkey) {
+				ht[h0].key = key;
+				return 0;
+			}
+			if (i == m)
+				return -1;
+		}
+	}
+}
+//查找散列表
+int SearchHash(HashTable ht, KeyType key)
+{
+	int h0 = Hash(key);
+	if (ht[h0].key == nullkey) return -1;
+	else if (ht[h0].key == key) return h0;
+	else {
+		for (int i = 1; i < m; i++) {
+			h0 = (h0 + i) % m;
+			if (ht[h0].key == key) return h0;
+			else if (ht[h0].key == nullkey) return -1;
+		}
+		return -1;
+	}
+
+}
+
 
 #endif // ! SEARCH_H_INCLUDE
