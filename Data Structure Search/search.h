@@ -11,6 +11,11 @@ typedef struct {
 	ElemType *R;
 	int lenth;
 }SSTable;
+//初始化顺序表
+void InitSSTable(SSTable &st)
+{
+	st.R = new ElemType(st.lenth);
+}
 //顺序查找(顺序)
 int Search_Seq(SSTable ST, ElemType key)
 {
@@ -36,7 +41,7 @@ int Search_Bin(SSTable ST, ElemType key)
 {
 	int l = 1, r = ST.lenth;
 	while (l <= r) {
-		int mid = (l + 1) >> 1;
+		int mid = (l + r) >> 1;
 		if (ST.R[mid] == key) return mid;
 		else if (ST.R[mid] < key) l = mid + 1;
 		else r = mid - 1;
@@ -94,7 +99,7 @@ void Traver_BS(BSTree T)
 #define nullkey 0
 typedef struct
 {
-	KeyType key;
+	KeyType key = 0;
 	//infoType otherinfo;
 }HashTable[m];
 //除留余数法
